@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void oops(const char *str);
+
+int main(int argc, char *argv[])
+{
+    const char file[] = "./out";
+    char msg[100] = "hello\n";
+    FILE *fp = NULL;
+
+    fp = fopen(file, "w");
+    if (NULL==fp) oops("fopen");
+
+    /* fputs(msg, fp); */
+    fwrite(msg, sizeof(char), strlen(msg), fp);
+
+    fclose(fp);
+
+    return 0;
+}
+
+void oops(const char *str)
+{
+    perror(str);
+    exit(1);
+}
